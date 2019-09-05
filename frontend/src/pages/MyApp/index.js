@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
+import { login } from '../../utils/auth';
 
 export default withRouter(class MyApp extends React.Component { 
   async componentDidMount() {
@@ -11,7 +12,11 @@ export default withRouter(class MyApp extends React.Component {
       code: query.code
     });
 
-    console.log(response.data);
+    const token = response.data.access_token;
+
+    login(token);
+
+    this.props.history.push('/private');
   }
 
 render() {

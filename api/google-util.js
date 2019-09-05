@@ -91,7 +91,18 @@ async function getGoogleAccountFromCode(code) {
   };
 }
 
+async function verifyGoogleToken(access_token) {
+  const auth = createConnection();
+
+  const isTokenInfo = await auth.getTokenInfo(access_token);
+
+  return {
+    isTokenInfo
+  };
+}
+
 module.exports = {
   urlGoogle,
-  getGoogleAccountFromCode
+  getGoogleAccountFromCode,
+  verifyGoogleToken
 };
