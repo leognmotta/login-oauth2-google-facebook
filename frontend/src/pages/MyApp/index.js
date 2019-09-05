@@ -7,7 +7,7 @@ export default withRouter(class MyApp extends React.Component {
   async componentDidMount() {
     const query = queryString.parse(this.props.location.search);
 
-    const response = await axios.post('http://localhost:3333/authenticate', {
+    const response = await axios.post('http://localhost:3333/authenticate/google', {
       code: query.code
     });
 

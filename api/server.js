@@ -7,18 +7,18 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+let user;
+
 app.get("/auth/google", (req, res) => {
   const url = urlGoogle();
 
   res.json(url);
 });
 
-app.post("/authenticate", async (req, res) => {
+app.post("/authenticate/google", async (req, res) => {
   const { code } = req.body;
 
-  const user = await getGoogleAccountFromCode(code);
-
-  console.log(user);
+  user = await getGoogleAccountFromCode(code);
 
   const { id, email, tokens, name, avatar, gender } = user;
 
