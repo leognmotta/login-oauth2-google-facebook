@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaGoogle } from 'react-icons/fa';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+
+import { FaGoogle, FaFacebookF } from 'react-icons/fa';
 
 import { Container } from './styles';
 
@@ -18,13 +20,31 @@ export default function Home() {
     loadUrl();
   }, []);
 
+  const responseFacebook = async (response) => {
+    await axios.post('http://localhost:3333/authenticate/facebook', {
+      response
+    });
+  }
 
   return (
     <Container>
       <div>
         <h1>Login</h1>
-        <a href={url}> 
-          <FaGoogle /> 
+        <FacebookLogin
+          appId="2997059460336350"
+          autoload={false}
+          fields="name,email,picture"
+          callback={responseFacebook}
+          render={renderProps => (
+            <button onClick={renderProps.onClick} class="facebook">
+              <FaFacebookF />
+              Login with facebook
+            </button>
+          )}
+        />
+
+        <a href={url}>
+          <FaGoogle />
           Login with google
         </a>
       </div>

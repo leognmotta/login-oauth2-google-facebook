@@ -24,7 +24,7 @@ div {
     margin-bottom: 20px;
   }
 
-  a {
+  a, button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,6 +45,10 @@ div {
     svg {
       margin-right: 10px;
     }
+  }
+
+  .facebook {
+    background-color: #405EAC;
   }
 }
 `;
