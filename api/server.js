@@ -30,4 +30,12 @@ app.get("/private", auth, (req, res) => {
   res.json({ private_message: "Developers are gods!" });
 });
 
+app.post("/authenticate/facebook", async (req, res) => {
+  user = req.body;
+
+  console.log(req.body)
+
+  return res.json(user);
+});
+
 app.listen(3333);
