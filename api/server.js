@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const { urlGoogle, getGoogleAccountFromCode } = require("./google-util");
+const auth = require("./middlewares");
 
 const app = express();
 
@@ -20,16 +21,13 @@ app.post("/authenticate/google", async (req, res) => {
 
   user = await getGoogleAccountFromCode(code);
 
-  const { id, email, tokens, name, avatar, gender } = user;
+  const { tokens } = user;
 
-  res.json({
-    id,
-    email,
-    tokens,
-    name,
-    avatar,
-    gender
-  });
+  res.json(tokens);
+});
+
+app.get("/private", auth, (req, res) => {
+  res.json({ private_message: "Developers are gods!" });
 });
 
 app.listen(3333);
